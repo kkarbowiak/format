@@ -1,0 +1,19 @@
+name: Build format
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: CMake configure
+        run: cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug
+
+      - name: CMake build
+        run: cmake --build build --parallel
