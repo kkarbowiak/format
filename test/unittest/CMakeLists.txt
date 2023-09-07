@@ -6,4 +6,6 @@ target_sources(unittest
     main.cpp
     test_format.cpp)
 
+target_compile_features(unittest PRIVATE cxx_std_20)
+
 target_link_libraries(unittest PRIVATE format)
