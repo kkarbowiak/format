@@ -7,5 +7,6 @@ target_sources(unittest
     test_format.cpp)
 
 target_compile_features(unittest PRIVATE cxx_std_20)
+target_compile_options(unittest PRIVATE -Wall -Wextra -Werror -pedantic-errors)
 
 target_link_libraries(unittest PRIVATE format)
