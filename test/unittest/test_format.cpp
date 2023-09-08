@@ -15,5 +15,13 @@ TEST_CASE("_fmt is a user-defined string literal of a type that implements funct
 
 TEST_CASE("The function call operator returns the text of the string literal")
 {
-    REQUIRE("text"_fmt() == "text");
+    SUBCASE("empty string")
+    {
+        REQUIRE(""_fmt() == "");
+    }
+
+    SUBCASE("non-empty string")
+    {
+        REQUIRE("text"_fmt() == "text");
+    }
 }
