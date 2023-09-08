@@ -1,11 +1,9 @@
 #pragma once
 
+#include <string>
 
-void f()
-{
-}
 
-auto operator""_fmt(char const *, long unsigned int)
+auto operator""_fmt(char const * text, long unsigned int)
 {
-    return f;
+    return [=]{ return std::string(text); };
 }
