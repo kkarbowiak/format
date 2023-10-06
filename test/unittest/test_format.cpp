@@ -28,5 +28,13 @@ TEST_CASE("The function call operator returns the text of the string literal")
 
 TEST_CASE("The function call operator returns text with braces replaced by text passed as parameter")
 {
-    REQUIRE("{}"_fmt("text") == "text");
+    SUBCASE("empty string")
+    {
+        REQUIRE("{}"_fmt("") == "");
+    }
+
+    SUBCASE("non-empty string")
+    {
+        REQUIRE("{}"_fmt("text") == "text");
+    }
 }
