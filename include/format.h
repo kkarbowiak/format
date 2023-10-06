@@ -1,23 +1,20 @@
 #pragma once
 
 #include <string>
+#include <format>
 
 
 auto operator""_fmt(char const * text, long unsigned int)
 {
     return [=](auto && ... ts)
     {
-        auto result = std::string(text);
-
-        if constexpr (sizeof...(ts) == 1)
+        if constexpr (sizeof...(ts) == 0)
         {
-            auto const pos = result.find("{}");
-            if (pos != std::string::npos)
-            {
-                result.replace(pos, 2, ts...);
-            }
+            return std::string(text);
         }
-
-        return result;
+        else
+        {
+            return std::vformat(text, std::make_format_args(ts...));
+        }
     };
 }
