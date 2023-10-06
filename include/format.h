@@ -22,13 +22,6 @@ auto operator""_fmt()
 {
     return [=](auto && ... ts)
     {
-        if constexpr (sizeof...(ts) == 0)
-        {
-            return std::string(fh.p);
-        }
-        else
-        {
-            return std::format(fh.p, ts...);
-        }
+        return std::format(fh.p, ts...);
     };
 }
