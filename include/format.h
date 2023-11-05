@@ -1,23 +1,26 @@
 #pragma once
 
-#include <string>
+#include <format>
 
 
-auto operator""_fmt(char const * text, long unsigned int)
+template<std::size_t N>
+struct FormatHelper
+{
+    char p[N]{};
+
+    constexpr FormatHelper(char const (&pp)[N])
+    {
+        for (std::size_t i = 0; i < N; ++i)
+        {
+            p[i] = pp[i];
+        }
+    }
+};
+template<FormatHelper fh>
+auto operator""_fmt()
 {
     return [=](auto && ... ts)
     {
-        auto result = std::string(text);
-
-        if constexpr (sizeof...(ts) == 1)
-        {
-            auto const pos = result.find("{}");
-            if (pos != std::string::npos)
-            {
-                result.replace(pos, 2, ts...);
-            }
-        }
-
-        return result;
+        return std::format(fh.p, ts...);
     };
 }
